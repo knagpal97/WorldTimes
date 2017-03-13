@@ -20,6 +20,7 @@ app.get('/', function(req, res){
 
 app.post('/submit/city', function(req, res){
 	var city = req.body.city;
+	city = toTitleCase(city);
 	city = city.replace(/ /g,"_");
 	var date = new Date();
 	var places = ['Africa', 'America', 'Asia', 'Antarctica', 'Asia', 
@@ -48,7 +49,10 @@ app.post('/submit/city', function(req, res){
 	}
 });
 
-
+function toTitleCase(str)
+{
+   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
 app.listen(3000, function() {
 	console.log('Server Started on Port 3000')
